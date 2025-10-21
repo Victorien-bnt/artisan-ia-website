@@ -55,18 +55,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentScrollY = window.scrollY;
     
     if (currentScrollY > 100) {
-      header.classList.add('bg-white/95', 'shadow-sm');
+      header.classList.add('bg-white/95', 'shadow-lg', 'backdrop-blur-xl');
       header.classList.remove('bg-white/80');
     } else {
       header.classList.add('bg-white/80');
-      header.classList.remove('bg-white/95', 'shadow-sm');
+      header.classList.remove('bg-white/95', 'shadow-lg', 'backdrop-blur-xl');
     }
     
-    // Hide/show header on scroll
+    // Hide/show header on scroll with smooth animation
     if (currentScrollY > lastScrollY && currentScrollY > 200) {
       header.style.transform = 'translateY(-100%)';
+      header.style.transition = 'transform 0.3s ease-in-out';
     } else {
       header.style.transform = 'translateY(0)';
+      header.style.transition = 'transform 0.3s ease-in-out';
     }
     
     lastScrollY = currentScrollY;
@@ -380,11 +382,62 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
+  // ===== ENHANCED UX FEATURES =====
+  
+  // Add loading animation
+  window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+    
+    // Add entrance animations
+    const heroElements = document.querySelectorAll('#hero > *');
+    heroElements.forEach((element, index) => {
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(30px)';
+      setTimeout(() => {
+        element.style.transition = 'all 0.8s ease-out';
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+      }, index * 200);
+    });
+  });
+  
+  // Enhanced button interactions
+  document.querySelectorAll('a[href^="#"], button').forEach(element => {
+    element.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.05)';
+    });
+    
+    element.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+    });
+  });
+  
+  // Add ripple effect to buttons
+  function createRipple(event) {
+    const button = event.currentTarget;
+    const circle = document.createElement('span');
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+    
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+    circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+    circle.classList.add('ripple');
+    
+    const ripple = button.getElementsByClassName('ripple')[0];
+    if (ripple) {
+      ripple.remove();
+    }
+    
+    button.appendChild(circle);
+  }
+  
+  document.querySelectorAll('button, a[href^="#"]').forEach(button => {
+    button.addEventListener('click', createRipple);
+  });
+  
   // ===== INITIALIZATION COMPLETE =====
   console.log('Artisan\'IA website initialized successfully');
-  
-  // Add loaded class to body for CSS animations
-  document.body.classList.add('loaded');
   
 });
 
