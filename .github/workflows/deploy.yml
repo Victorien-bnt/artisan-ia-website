@@ -19,6 +19,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          port: 2002
           script: |
             cd ~/artisan-ia-website
             git pull origin main
