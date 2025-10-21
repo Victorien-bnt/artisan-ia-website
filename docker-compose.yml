@@ -1,0 +1,16 @@
+version: '3'
+services:
+  artisania_site:
+    image: nginx:latest
+    container_name: artisania_site
+    restart: always
+    ports:
+      - "8090:80"
+    volumes:
+      - .:/usr/share/nginx/html:ro
+    networks:
+      - artisan_network
+
+networks:
+  artisan_network:
+    external: true
