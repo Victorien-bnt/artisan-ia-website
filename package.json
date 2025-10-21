@@ -1,0 +1,38 @@
+{
+  "name": "artisan-ia-website",
+  "version": "1.0.0",
+  "description": "Site vitrine moderne pour Artisan'IA - Solution d'intelligence artisanale",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./style.css -o ./dist/style.css --watch",
+    "build": "npx tailwindcss -i ./style.css -o ./dist/style.css --minify",
+    "serve": "npx http-server . -p 3000 -o",
+    "docker:build": "docker build -t artisan-ia-website .",
+    "docker:run": "docker run -p 80:80 artisan-ia-website",
+    "docker:compose": "docker-compose up -d"
+  },
+  "keywords": [
+    "artisan",
+    "ia",
+    "intelligence-artificielle",
+    "automatisation",
+    "tpe",
+    "gestion",
+    "website",
+    "landing-page"
+  ],
+  "author": "Artisan'IA Team",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.3.0",
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/artisan-ia/website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/artisan-ia/website/issues"
+  },
+  "homepage": "https://artisan-ia.com"
+}
