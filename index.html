@@ -101,13 +101,19 @@
   
   <link rel="stylesheet" href="style.css">
 </head>
-  <body class="bg-white text-secondary-500 font-sans antialiased overflow-x-hidden">
+  <body class="bg-gradient-to-br from-gray-50 via-white to-gray-50 text-secondary-500 font-sans antialiased overflow-x-hidden">
 
   <!-- HEADER -->
-  <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-gray-100/50 z-50 transition-all duration-300 shadow-sm" id="header">
+  <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-primary-200/30 z-50 transition-all duration-300 shadow-lg" id="header">
     <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6 lg:px-8">
       <div class="flex items-center">
-        <img src="assets/images/g4.png" alt="Logo Artisan'IA" class="h-12 w-auto hover:scale-105 transition-transform duration-300">
+        <img src="./assets/images/g4.png" alt="Logo Artisan'IA" class="h-12 w-auto hover:scale-105 transition-transform duration-300" loading="eager" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display:none;" class="flex items-center">
+          <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+            <span class="text-white font-bold text-lg">A</span>
+          </div>
+          <span class="ml-3 text-xl font-bold text-secondary-500">Artisan'IA</span>
+        </div>
       </div>
       
       <nav class="hidden md:flex items-center space-x-8">
@@ -125,7 +131,7 @@
         </a>
       </nav>
       
-      <a href="#contact" class="hidden md:inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-medium rounded-full hover:from-primary-600 hover:to-primary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+      <a href="#contact" class="hidden md:inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-medium rounded-full hover:from-primary-600 hover:to-primary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-primary-400/20">
         <span class="mr-2">🚀</span>
         Devenir bêta-testeur
       </a>
@@ -154,7 +160,8 @@
   <!-- HERO SECTION -->
   <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-100/30 via-transparent to-transparent"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-100/40 via-transparent to-transparent"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent-100/20 via-transparent to-transparent"></div>
     
     <!-- Floating elements -->
     <div class="absolute top-20 left-10 w-20 h-20 bg-primary-200/20 rounded-full animate-float"></div>
@@ -178,14 +185,14 @@
       </div>
       
       <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-slide-up">
-        <a href="#features" class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-lg font-medium rounded-full hover:from-primary-600 hover:to-primary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+        <a href="#features" class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-lg font-medium rounded-full hover:from-primary-600 hover:to-primary-700 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl border border-primary-400/20">
           <span class="mr-2">✨</span>
           Découvrir Artisan'IA et ses fonctionnalités
           <svg class="ml-2 w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </a>
-        <a href="#contact" class="group inline-flex items-center px-8 py-4 border-2 border-primary-200 text-secondary-500 text-lg font-medium rounded-full hover:border-primary-300 hover:bg-primary-50 transition-all duration-300 hover:scale-105">
+        <a href="#contact" class="group inline-flex items-center px-8 py-4 border-2 border-primary-300 text-secondary-500 text-lg font-medium rounded-full hover:border-primary-400 hover:bg-primary-50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
           <span class="mr-2">🎯</span>
           Voir la démonstration en direct
         </a>
@@ -210,7 +217,7 @@
   </section>
 
   <!-- FEATURES SECTION -->
-  <section id="features" class="py-24 bg-white">
+  <section id="features" class="py-24 bg-gradient-to-b from-white to-gray-50">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-20">
         <h2 class="text-4xl md:text-5xl font-bold text-secondary-500 mb-6">
@@ -222,7 +229,7 @@
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="group p-8 rounded-2xl border border-gray-100 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white">
+        <div class="group p-8 rounded-2xl border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-white/80 backdrop-blur-sm">
           <div class="w-14 h-14 bg-gradient-to-br from-primary-100 to-primary-200 rounded-xl flex items-center justify-center mb-6 group-hover:from-primary-500 group-hover:to-primary-600 transition-all duration-300 group-hover:scale-110">
             <svg class="w-7 h-7 text-primary-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -258,7 +265,7 @@
           </p>
         </div>
         
-        <div class="group p-8 rounded-2xl border border-gray-100 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white">
+        <div class="group p-8 rounded-2xl border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-white/80 backdrop-blur-sm">
           <div class="w-14 h-14 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-xl flex items-center justify-center mb-6 group-hover:from-primary-500 group-hover:to-secondary-500 transition-all duration-300 group-hover:scale-110">
             <svg class="w-7 h-7 text-primary-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
@@ -274,7 +281,7 @@
   </section>
 
   <!-- WHY SECTION -->
-  <section class="py-24 bg-gray-50">
+  <section class="py-24 bg-gradient-to-b from-gray-50 to-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-20">
         <h2 class="text-4xl md:text-5xl font-bold text-secondary-500 mb-6">
@@ -398,7 +405,13 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="flex items-center mb-4 md:mb-0">
-          <img src="assets/images/g4.png" alt="Logo Artisan'IA" class="h-10 w-auto hover:scale-105 transition-transform duration-300">
+          <img src="./assets/images/g4.png" alt="Logo Artisan'IA" class="h-10 w-auto hover:scale-105 transition-transform duration-300" loading="eager" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div style="display:none;" class="flex items-center">
+            <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+              <span class="text-white font-bold text-sm">A</span>
+            </div>
+            <span class="ml-2 text-lg font-bold text-secondary-500">Artisan'IA</span>
+          </div>
         </div>
         
         <div class="flex flex-col md:flex-row items-center gap-6 text-sm text-gray-600">
