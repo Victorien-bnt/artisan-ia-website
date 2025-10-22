@@ -136,8 +136,39 @@
   
   <link rel="stylesheet" href="style.css">
   
+  <!-- CSS pour corriger la barre de scroll -->
+  <style>
+    /* Barre de scroll personnalisée */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #1d4885;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #163661;
+    }
+    
+    /* Supprimer définitivement les boutons de scroll */
+    button[class*="scroll"],
+    button[class*="top"],
+    .scroll-to-top,
+    .fixed.bottom-6.right-6,
+    .fixed.bottom-4.right-4,
+    .fixed.bottom-8.right-8 {
+      display: none !important;
+    }
+  </style>
+  
 </head>
-  <body class="bg-white text-secondary-500 font-sans antialiased overflow-x-hidden scroll-smooth relative" style="scroll-behavior: smooth;">
+  <body class="bg-white text-secondary-500 font-sans antialiased overflow-x-hidden scroll-smooth relative" style="scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #1d4885 #f0f0f0;">
     <!-- Subtle background elements -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden">
       <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-50/30 rounded-full blur-3xl animate-pulse"></div>
@@ -387,11 +418,7 @@
         <!-- Contact form -->
         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
           <h3 class="text-2xl font-semibold mb-6">Contactez-nous</h3>
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
-            <input type="hidden" name="form-name" value="contact" />
-            <div style="display: none;">
-              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-            </div>
+          <form id="contact-form" class="space-y-6">
             <div>
               <input type="text" name="name" placeholder="Votre nom et entreprise" required 
                      class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200">
@@ -552,63 +579,63 @@
       document.body.style.transition = 'opacity 0.5s ease-in-out';
     });
 
-    // Remove any existing scroll buttons first
-    const existingButtons = document.querySelectorAll('button[aria-label*="Retour"], .fixed.bottom-6.right-6');
-    existingButtons.forEach(btn => btn.remove());
-    
-    // Clean scroll to top button
-    const scrollToTopBtn = document.createElement('button');
-    scrollToTopBtn.innerHTML = `
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-      </svg>
-    `;
-    scrollToTopBtn.className = 'fixed bottom-6 right-6 w-12 h-12 bg-primary-500 text-white rounded-full shadow-lg hover:bg-primary-600 transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center justify-center';
-    scrollToTopBtn.setAttribute('aria-label', 'Retour en haut');
-    scrollToTopBtn.id = 'scroll-to-top-btn';
-    
-    document.body.appendChild(scrollToTopBtn);
-    
-    // Show/hide button on scroll
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-        scrollToTopBtn.classList.add('opacity-100');
-      } else {
-        scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
-        scrollToTopBtn.classList.remove('opacity-100');
-      }
-    });
-    
-    // Smooth scroll to top
-    scrollToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    // Supprimer TOUS les boutons de scroll existants
+    function removeAllScrollButtons() {
+      const allButtons = document.querySelectorAll('button, .fixed, [class*="scroll"], [class*="top"]');
+      allButtons.forEach(btn => {
+        if (btn.style.position === 'fixed' && 
+            (btn.style.bottom || btn.classList.contains('bottom-6') || btn.classList.contains('bottom-4') || btn.classList.contains('bottom-8')) &&
+            (btn.style.right || btn.classList.contains('right-6') || btn.classList.contains('right-4') || btn.classList.contains('right-8'))) {
+          btn.remove();
+        }
       });
-    });
+    }
+    
+    // Supprimer immédiatement
+    removeAllScrollButtons();
+    
+    // Supprimer toutes les 100ms pour être sûr
+    setInterval(removeAllScrollButtons, 100);
 
-    // Contact form handling - NETLIFY FORMS (100% AUTOMATIC)
-    const contactForm = document.querySelector('form[name="contact"]');
+    // Contact form handling - PHP SCRIPT (100% AUTOMATIC)
+    const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-      contactForm.addEventListener('submit', (e) => {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const data = {
+          name: formData.get('name'),
+          email: formData.get('email'),
+          message: formData.get('message')
+        };
+        
         // Show loading state
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Envoi en cours...';
         submitBtn.disabled = true;
         
-        // Let Netlify handle the form submission
-        // The form will be submitted to Netlify automatically
-        // and you'll receive the email at victorienbinant@artisan-ia.fr
-        
-        // Show success message after a short delay
-        setTimeout(() => {
-          alert('✅ Message envoyé avec succès ! Nous vous répondrons rapidement.');
-          contactForm.reset();
+        try {
+          const response = await fetch('contact.php', {
+            method: 'POST',
+            body: formData
+          });
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            alert('✅ Message envoyé avec succès ! Nous vous répondrons rapidement.');
+            contactForm.reset();
+          } else {
+            alert('❌ Erreur: ' + result.message);
+          }
+        } catch (error) {
+          alert('❌ Erreur technique. Veuillez réessayer ou nous contacter par WhatsApp.');
+        } finally {
           submitBtn.textContent = originalText;
           submitBtn.disabled = false;
-        }, 1000);
+        }
       });
     }
   </script>
