@@ -136,23 +136,6 @@
   
   <link rel="stylesheet" href="style.css">
   
-  <!-- Hide any scroll to top buttons -->
-  <style>
-    button[aria-label*="Retour"], 
-    button[aria-label*="scroll"], 
-    .scroll-to-top,
-    button[class*="scroll"],
-    button[class*="top"] {
-      display: none !important;
-    }
-    
-    /* Hide any fixed bottom right buttons */
-    .fixed.bottom-8.right-8,
-    .fixed.bottom-4.right-4,
-    .fixed.bottom-6.right-6 {
-      display: none !important;
-    }
-  </style>
 </head>
   <body class="bg-white text-secondary-500 font-sans antialiased overflow-x-hidden scroll-smooth relative" style="scroll-behavior: smooth;">
     <!-- Subtle background elements -->
@@ -404,7 +387,7 @@
         <!-- Contact form -->
         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
           <h3 class="text-2xl font-semibold mb-6">Contactez-nous</h3>
-          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-6">
+          <form action="https://formspree.io/f/victorienbinant@artisan-ia.fr" method="POST" class="space-y-6">
             <div>
               <input type="text" name="name" placeholder="Votre nom et entreprise" required 
                      class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200">
@@ -439,7 +422,7 @@
           <p class="text-gray-300 mb-6">
             Réponse immédiate via WhatsApp. Parfait pour les questions rapides.
           </p>
-          <a href="https://wa.me/336XXXXXXXX?text=Bonjour%20Artisan'IA%2C%20je%20souhaite%20en%20savoir%20plus%20!" 
+          <a href="https://wa.me/33664156439?text=Bonjour%20Artisan'IA%2C%20je%20souhaite%20en%20savoir%20plus%20!" 
              target="_blank"
              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-xl hover:from-accent-600 hover:to-accent-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -565,15 +548,36 @@
       document.body.style.transition = 'opacity 0.5s ease-in-out';
     });
 
-    // Remove any scroll to top buttons that might be created
-    setInterval(() => {
-      const scrollButtons = document.querySelectorAll('button[aria-label*="Retour"], button[aria-label*="scroll"], .scroll-to-top, button[class*="scroll"], button[class*="top"], .fixed.bottom-8.right-8, .fixed.bottom-4.right-4, .fixed.bottom-6.right-6');
-      scrollButtons.forEach(button => {
-        if (button.parentNode) {
-          button.parentNode.removeChild(button);
-        }
+    // Clean scroll to top button
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.innerHTML = `
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+      </svg>
+    `;
+    scrollToTopBtn.className = 'fixed bottom-6 right-6 w-12 h-12 bg-primary-500 text-white rounded-full shadow-lg hover:bg-primary-600 transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center justify-center';
+    scrollToTopBtn.setAttribute('aria-label', 'Retour en haut');
+    
+    document.body.appendChild(scrollToTopBtn);
+    
+    // Show/hide button on scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+        scrollToTopBtn.classList.add('opacity-100');
+      } else {
+        scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+        scrollToTopBtn.classList.remove('opacity-100');
+      }
+    });
+    
+    // Smooth scroll to top
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       });
-    }, 100);
+    });
   </script>
 </body>
 </html>
