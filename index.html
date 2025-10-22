@@ -135,6 +135,24 @@
   </script>
   
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Hide any scroll to top buttons -->
+  <style>
+    button[aria-label*="Retour"], 
+    button[aria-label*="scroll"], 
+    .scroll-to-top,
+    button[class*="scroll"],
+    button[class*="top"] {
+      display: none !important;
+    }
+    
+    /* Hide any fixed bottom right buttons */
+    .fixed.bottom-8.right-8,
+    .fixed.bottom-4.right-4,
+    .fixed.bottom-6.right-6 {
+      display: none !important;
+    }
+  </style>
 </head>
   <body class="bg-white text-secondary-500 font-sans antialiased overflow-x-hidden scroll-smooth relative" style="scroll-behavior: smooth;">
     <!-- Subtle background elements -->
@@ -546,6 +564,16 @@
       document.body.style.opacity = '1';
       document.body.style.transition = 'opacity 0.5s ease-in-out';
     });
+
+    // Remove any scroll to top buttons that might be created
+    setInterval(() => {
+      const scrollButtons = document.querySelectorAll('button[aria-label*="Retour"], button[aria-label*="scroll"], .scroll-to-top, button[class*="scroll"], button[class*="top"], .fixed.bottom-8.right-8, .fixed.bottom-4.right-4, .fixed.bottom-6.right-6');
+      scrollButtons.forEach(button => {
+        if (button.parentNode) {
+          button.parentNode.removeChild(button);
+        }
+      });
+    }, 100);
   </script>
 </body>
 </html>
