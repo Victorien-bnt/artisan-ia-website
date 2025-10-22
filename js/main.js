@@ -225,32 +225,8 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCounter();
   }
   
-  // ===== SCROLL TO TOP BUTTON =====
-  const scrollToTopBtn = document.createElement('button');
-  scrollToTopBtn.innerHTML = `
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-    </svg>
-  `;
-  scrollToTopBtn.className = 'fixed bottom-8 right-8 w-12 h-12 bg-gray-900 text-white rounded-full shadow-lg hover:bg-gray-800 transition-all duration-300 opacity-0 pointer-events-none z-40';
-  scrollToTopBtn.setAttribute('aria-label', 'Retour en haut');
-  
-  document.body.appendChild(scrollToTopBtn);
-  
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-      scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-    } else {
-      scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
-    }
-  });
-  
-  scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
+  // ===== SCROLL TO TOP BUTTON (DISABLED) =====
+  // Scroll to top button removed to avoid UI conflicts
   
   // ===== PERFORMANCE OPTIMIZATIONS =====
   
