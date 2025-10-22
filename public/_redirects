@@ -1,0 +1,8 @@
+# Netlify redirects and form handling
+/*    /index.html   200
+
+# Form submissions
+/contact    /index.html   200
+
+# API routes for form handling
+/api/contact    /.netlify/functions/contact    200

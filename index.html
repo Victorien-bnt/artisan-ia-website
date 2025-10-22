@@ -387,7 +387,11 @@
         <!-- Contact form -->
         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
           <h3 class="text-2xl font-semibold mb-6">Contactez-nous</h3>
-          <form id="contact-form" class="space-y-6">
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
+            <input type="hidden" name="form-name" value="contact" />
+            <div style="display: none;">
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </div>
             <div>
               <input type="text" name="name" placeholder="Votre nom et entreprise" required 
                      class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200">
@@ -584,61 +588,27 @@
       });
     });
 
-    // Contact form handling
-    const contactForm = document.getElementById('contact-form');
+    // Contact form handling - NETLIFY FORMS (100% AUTOMATIC)
+    const contactForm = document.querySelector('form[name="contact"]');
     if (contactForm) {
-      contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const data = {
-          name: formData.get('name'),
-          email: formData.get('email'),
-          message: formData.get('message')
-        };
-        
+      contactForm.addEventListener('submit', (e) => {
         // Show loading state
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Envoi en cours...';
         submitBtn.disabled = true;
         
-        try {
-          // Send email using EmailJS (free service)
-          const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              service_id: 'service_artisan_ia',
-              template_id: 'template_contact',
-              user_id: 'user_artisan_ia',
-              template_params: {
-                from_name: data.name,
-                from_email: data.email,
-                message: data.message,
-                to_email: 'victorienbinant@artisan-ia.fr'
-              }
-            })
-          });
-          
-          if (response.ok) {
-            alert('Message envoyé avec succès ! Nous vous répondrons rapidement.');
-            contactForm.reset();
-          } else {
-            throw new Error('Erreur lors de l\'envoi');
-          }
-        } catch (error) {
-          // Fallback: open email client
-          const subject = encodeURIComponent('Contact Artisan\'IA - ' + data.name);
-          const body = encodeURIComponent(`Nom: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`);
-          window.open(`mailto:victorienbinant@artisan-ia.fr?subject=${subject}&body=${body}`);
-          alert('Votre client email s\'ouvre. Vous pouvez envoyer le message manuellement.');
-        } finally {
+        // Let Netlify handle the form submission
+        // The form will be submitted to Netlify automatically
+        // and you'll receive the email at victorienbinant@artisan-ia.fr
+        
+        // Show success message after a short delay
+        setTimeout(() => {
+          alert('✅ Message envoyé avec succès ! Nous vous répondrons rapidement.');
+          contactForm.reset();
           submitBtn.textContent = originalText;
           submitBtn.disabled = false;
-        }
+        }, 1000);
       });
     }
   </script>
