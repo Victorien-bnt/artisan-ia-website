@@ -29,40 +29,40 @@
           },
           colors: {
             primary: {
-              50: '#fef2f2',
-              100: '#fee2e2',
-              200: '#fecaca',
-              300: '#fca5a5',
-              400: '#f87171',
-              500: '#ef4444',
-              600: '#dc2626',
-              700: '#b91c1c',
-              800: '#991b1b',
-              900: '#7f1d1d',
+              50: '#f0f4f8',
+              100: '#d9e2ec',
+              200: '#bcccdc',
+              300: '#9fb3c8',
+              400: '#829ab1',
+              500: '#1d4885',
+              600: '#1a3f73',
+              700: '#163661',
+              800: '#122d4f',
+              900: '#0e243d',
             },
             secondary: {
-              50: '#fffbeb',
-              100: '#fef3c7',
-              200: '#fde68a',
-              300: '#fcd34d',
-              400: '#fbbf24',
-              500: '#f59e0b',
-              600: '#d97706',
-              700: '#b45309',
-              800: '#92400e',
-              900: '#78350f',
+              50: '#f8f8f8',
+              100: '#f0f0f0',
+              200: '#e4e4e4',
+              300: '#d1d1d1',
+              400: '#b4b4b4',
+              500: '#1c1c1c',
+              600: '#191919',
+              700: '#161616',
+              800: '#131313',
+              900: '#101010',
             },
             accent: {
-              50: '#ecfdf5',
-              100: '#d1fae5',
-              200: '#a7f3d0',
-              300: '#6ee7b7',
-              400: '#34d399',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857',
-              800: '#065f46',
-              900: '#064e3b',
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
             }
           },
           animation: {
@@ -101,25 +101,25 @@
   
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-white text-gray-900 font-sans antialiased overflow-x-hidden">
+  <body class="bg-white text-secondary-500 font-sans antialiased overflow-x-hidden">
 
   <!-- HEADER -->
   <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-gray-100/50 z-50 transition-all duration-300 shadow-sm" id="header">
     <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6 lg:px-8">
       <div class="flex items-center">
-        <img src="assets/images/Logo Artisan'IA4.svg" alt="Logo Artisan'IA" class="h-10 w-auto hover:scale-105 transition-transform duration-300">
+        <img src="assets/images/g4.png" alt="Logo Artisan'IA" class="h-12 w-auto hover:scale-105 transition-transform duration-300">
       </div>
       
       <nav class="hidden md:flex items-center space-x-8">
-        <a href="#hero" class="text-sm font-medium text-gray-600 hover:text-primary-600 transition-all duration-200 relative group">
+        <a href="#hero" class="text-sm font-medium text-gray-600 hover:text-primary-500 transition-all duration-200 relative group">
           Accueil
           <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
         </a>
-        <a href="#features" class="text-sm font-medium text-gray-600 hover:text-primary-600 transition-all duration-200 relative group">
+        <a href="#features" class="text-sm font-medium text-gray-600 hover:text-primary-500 transition-all duration-200 relative group">
           Fonctionnalités
           <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
         </a>
-        <a href="#contact" class="text-sm font-medium text-gray-600 hover:text-primary-600 transition-all duration-200 relative group">
+        <a href="#contact" class="text-sm font-medium text-gray-600 hover:text-primary-500 transition-all duration-200 relative group">
           Contact
           <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
         </a>
@@ -144,7 +144,7 @@
         <a href="#hero" class="block text-sm font-medium text-gray-600 hover:text-gray-900">Accueil</a>
         <a href="#features" class="block text-sm font-medium text-gray-600 hover:text-gray-900">Fonctionnalités</a>
         <a href="#contact" class="block text-sm font-medium text-gray-600 hover:text-gray-900">Contact</a>
-        <a href="#contact" class="block w-full text-center px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-full">
+        <a href="#contact" class="block w-full text-center px-4 py-2 bg-secondary-500 text-white text-sm font-medium rounded-full">
           Devenir bêta-testeur
         </a>
       </div>
@@ -164,9 +164,9 @@
     <div class="relative z-10 max-w-5xl mx-auto">
       <div class="animate-fade-in">
         <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight">
-          <span class="bg-gradient-to-r from-gray-900 via-primary-600 to-secondary-500 bg-clip-text text-transparent">
+          <span class="bg-gradient-to-r from-primary-500 via-primary-600 to-secondary-500 bg-clip-text text-transparent">
             L'IA au service des artisans<br>
-            <span class="text-gray-900">et des entreprises</span>
+            <span class="text-secondary-500">et des entreprises</span>
           </span>
         </h1>
       </div>
@@ -185,7 +185,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </a>
-        <a href="#contact" class="group inline-flex items-center px-8 py-4 border-2 border-primary-200 text-gray-900 text-lg font-medium rounded-full hover:border-primary-300 hover:bg-primary-50 transition-all duration-300 hover:scale-105">
+        <a href="#contact" class="group inline-flex items-center px-8 py-4 border-2 border-primary-200 text-secondary-500 text-lg font-medium rounded-full hover:border-primary-300 hover:bg-primary-50 transition-all duration-300 hover:scale-105">
           <span class="mr-2">🎯</span>
           Voir la démonstration en direct
         </a>
@@ -213,7 +213,7 @@
   <section id="features" class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-20">
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        <h2 class="text-4xl md:text-5xl font-bold text-secondary-500 mb-6">
           Tout ce dont vous avez besoin
         </h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -228,7 +228,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary-700 transition-colors duration-300">Automatisez vos factures</h3>
+          <h3 class="text-xl font-semibold text-secondary-500 mb-3 group-hover:text-primary-700 transition-colors duration-300">Automatisez vos factures</h3>
           <p class="text-gray-600 leading-relaxed">
             Génération automatique des factures à partir de vos commandes. Plus de saisie manuelle, plus d'erreurs.
           </p>
@@ -240,7 +240,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-secondary-700 transition-colors duration-300">Suivez vos stocks</h3>
+          <h3 class="text-xl font-semibold text-secondary-500 mb-3 group-hover:text-secondary-700 transition-colors duration-300">Suivez vos stocks</h3>
           <p class="text-gray-600 leading-relaxed">
             Mise à jour automatique de vos stocks en temps réel. Alertes intelligentes pour éviter les ruptures.
           </p>
@@ -252,7 +252,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-accent-700 transition-colors duration-300">Discutez avec vos clients sur WhatsApp</h3>
+          <h3 class="text-xl font-semibold text-secondary-500 mb-3 group-hover:text-accent-700 transition-colors duration-300">Discutez avec vos clients sur WhatsApp</h3>
           <p class="text-gray-600 leading-relaxed">
             Communication directe avec vos clients via WhatsApp. Envoi automatique de bons de commande et factures.
           </p>
@@ -264,7 +264,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary-700 transition-colors duration-300">Pilotez tout depuis votre tableau de bord</h3>
+          <h3 class="text-xl font-semibold text-secondary-500 mb-3 group-hover:text-primary-700 transition-colors duration-300">Pilotez tout depuis votre tableau de bord</h3>
           <p class="text-gray-600 leading-relaxed">
             Vue d'ensemble complète de votre activité. Tableaux de bord intuitifs et rapports détaillés.
           </p>
@@ -277,7 +277,7 @@
   <section class="py-24 bg-gray-50">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-20">
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        <h2 class="text-4xl md:text-5xl font-bold text-secondary-500 mb-6">
           Pensé pour les artisans,<br>
           conçu pour être simple.
         </h2>
@@ -310,7 +310,7 @@
           <svg class="w-16 h-16 text-primary-300 mx-auto mb-8 animate-pulse-soft" fill="currentColor" viewBox="0 0 24 24">
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
           </svg>
-          <blockquote class="text-2xl md:text-3xl font-medium text-gray-900 mb-8 leading-relaxed">
+          <blockquote class="text-2xl md:text-3xl font-medium text-secondary-500 mb-8 leading-relaxed">
             "Grâce à Artisan'IA, je gagne 2 heures par jour. Je peux enfin me concentrer sur ce que j'aime faire : créer."
           </blockquote>
           <div class="flex items-center justify-center gap-4">
@@ -318,7 +318,7 @@
               <span class="text-primary-700 font-bold text-lg">J</span>
             </div>
             <div class="text-left">
-              <div class="font-semibold text-gray-900 text-lg">Jean</div>
+              <div class="font-semibold text-secondary-500 text-lg">Jean</div>
               <div class="text-gray-600">Producteur laitier</div>
             </div>
           </div>
@@ -328,7 +328,7 @@
   </section>
 
   <!-- CONTACT SECTION -->
-  <section id="contact" class="py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
+  <section id="contact" class="py-24 bg-gradient-to-br from-secondary-500 via-secondary-600 to-secondary-700 text-white relative overflow-hidden">
     <!-- Background decoration -->
     <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-500/10 via-transparent to-transparent"></div>
     <div class="absolute top-20 right-20 w-32 h-32 bg-primary-500/20 rounded-full animate-float"></div>
@@ -398,7 +398,7 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="flex items-center mb-4 md:mb-0">
-          <img src="assets/images/Logo Artisan'IA4.svg" alt="Logo Artisan'IA" class="h-8 w-auto hover:scale-105 transition-transform duration-300">
+          <img src="assets/images/g4.png" alt="Logo Artisan'IA" class="h-10 w-auto hover:scale-105 transition-transform duration-300">
         </div>
         
         <div class="flex flex-col md:flex-row items-center gap-6 text-sm text-gray-600">
