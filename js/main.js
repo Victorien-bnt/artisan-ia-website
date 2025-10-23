@@ -13,12 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Animate logo icon
       const logo = mobileMenuBtn.querySelector('img');
-      if (mobileMenu.classList.contains('hidden')) {
-        logo.style.transform = 'rotate(0deg) scale(1)';
-        logo.style.opacity = '1';
-      } else {
-        logo.style.transform = 'rotate(180deg) scale(0.9)';
-        logo.style.opacity = '0.7';
+      if (logo) {
+        if (mobileMenu.classList.contains('hidden')) {
+          logo.style.transform = 'rotate(0deg) scale(1)';
+          logo.style.opacity = '1';
+        } else {
+          logo.style.transform = 'rotate(180deg) scale(0.9)';
+          logo.style.opacity = '0.7';
+        }
       }
     });
     
@@ -27,8 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
       link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
         const logo = mobileMenuBtn.querySelector('img');
-        logo.style.transform = 'rotate(0deg) scale(1)';
-        logo.style.opacity = '1';
+        if (logo) {
+          logo.style.transform = 'rotate(0deg) scale(1)';
+          logo.style.opacity = '1';
+        }
       });
     });
   }
