@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Récupère ton code depuis GitHub
+      # 1️⃣ Clone ton repo GitHub
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ Envoie tous les fichiers sur ton VPS
+      # 2️⃣ Envoie les fichiers sur ton VPS
       - name: Deploy files via SCP
         uses: appleboy/scp-action@master
         with:
@@ -25,7 +25,7 @@ jobs:
           source: "."
           target: "/home/ubuntu/artisan-ia-website"
 
-      # 3️⃣ Redémarre ton site sur le VPS
+      # 3️⃣ Redémarre le site proprement
       - name: Restart Docker container
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -35,11 +35,10 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             cd /home/ubuntu/artisan-ia-website
-            # 🔥 Récupère la dernière version GitHub
+            echo "🔄 Forcing sync with GitHub main branch..."
             git fetch origin main || true
-            # 💥 Écrase tout et remet la version GitHub
             git reset --hard origin/main || true
-            # 🐳 Redémarre Docker proprement
+            echo "🐳 Restarting Docker..."
             sudo docker compose down || true
             sudo docker compose up -d --build
-            echo "✅ Déploiement terminé avec succès !"
+            echo "✅ Deployment complete!"
