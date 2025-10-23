@@ -624,6 +624,18 @@
         responseDiv.style.borderRadius = '8px';
         responseDiv.style.border = '1px solid #d1d5db';
         
+        // SIMULATION POUR TEST LOCAL - SUPPRIMER EN PRODUCTION
+        setTimeout(() => {
+          responseDiv.innerHTML = '✅ <strong>Mail envoyé avec succès !</strong> Nous vous répondrons rapidement.';
+          responseDiv.style.color = '#10b981';
+          responseDiv.style.backgroundColor = '#d1fae5';
+          responseDiv.style.padding = '12px';
+          responseDiv.style.borderRadius = '8px';
+          responseDiv.style.border = '1px solid #10b981';
+          form.reset();
+        }, 1000);
+        
+        /* VERSION PRODUCTION - DÉCOMMENTER QUAND SERVEUR PHP ACTIF
         try {
           const formData = new FormData(form);
           const response = await fetch(form.action, {
@@ -660,10 +672,14 @@
           responseDiv.style.padding = '12px';
           responseDiv.style.borderRadius = '8px';
           responseDiv.style.border = '1px solid #ef4444';
-        } finally {
+        }
+        */
+        
+        // Réactiver le bouton après simulation
+        setTimeout(() => {
           submitBtn.innerHTML = originalText;
           submitBtn.disabled = false;
-        }
+        }, 1000);
       });
     });
   </script>
