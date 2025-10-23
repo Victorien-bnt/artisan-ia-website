@@ -26,10 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (mail($to, $subject, $body, $headers)) {
         // Log de succès
         error_log("Email envoyé avec succès - Nom: $name, Email: $email");
+        file_put_contents('/var/log/contact.log', date('Y-m-d H:i:s') . " - Email envoyé: $name ($email)\n", FILE_APPEND);
         echo json_encode(['success' => true, 'message' => 'Message envoyé avec succès']);
     } else {
         // Log d'erreur
         error_log("Erreur envoi email - Nom: $name, Email: $email");
+        file_put_contents('/var/log/contact.log', date('Y-m-d H:i:s') . " - Erreur envoi: $name ($email)\n", FILE_APPEND);
         http_response_code(500);
         echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'envoi']);
     }
