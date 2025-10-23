@@ -13,8 +13,8 @@ COPY msmtprc /etc/msmtprc
 # Créer le fichier de log msmtp
 RUN touch /var/log/msmtp.log && chmod 666 /var/log/msmtp.log
 
-# Copier ton site
-COPY . /var/www/html
+# ⚠️ SUPPRESSION de la ligne COPY . /var/www/html
+# (on ne copie plus les fichiers ici — ils viendront du volume Docker)
 
 # Configuration Nginx pour PHP
 RUN echo 'server {' > /etc/nginx/http.d/default.conf && \
