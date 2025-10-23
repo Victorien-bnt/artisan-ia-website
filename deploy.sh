@@ -1,4 +1,4 @@
-name: Deploy to VPS
+name: 🚀 Deploy to VPS
 
 on:
   push:
@@ -8,16 +8,20 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v0.1.7
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.VPS_HOST }}
-          username: ubuntu
+          port: ${{ secrets.VPS_PORT }}
+          username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /home/ubuntu/artisan-ia-website
-            git pull
+            cd ~/artisan-ia-website
+            git pull origin main
+            sudo docker compose down
+            sudo docker compose up -d --build
