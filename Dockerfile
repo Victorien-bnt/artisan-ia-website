@@ -1,8 +1,8 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.2-apache
 
-# Installer msmtp et Nginx
-RUN apk update && apk add --no-cache msmtp ca-certificates nginx && \
-    rm -rf /var/cache/apk/*
+# Installer msmtp
+RUN apt-get update && apt-get install -y msmtp ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
 # Configurer PHP pour utiliser msmtp
 RUN echo "sendmail_path = /usr/bin/msmtp -t" >> /usr/local/etc/php/php.ini
@@ -13,32 +13,25 @@ COPY msmtprc /etc/msmtprc
 # Créer le fichier de log msmtp
 RUN touch /var/log/msmtp.log && chmod 666 /var/log/msmtp.log
 
-# ⚠️ SUPPRESSION de la ligne COPY . /var/www/html
-# (on ne copie plus les fichiers ici — ils viendront du volume Docker)
+# Copier ton site
+COPY . /var/www/html
 
-# Configuration Nginx pour PHP
-RUN echo 'server {' > /etc/nginx/http.d/default.conf && \
-    echo '    listen 80;' >> /etc/nginx/http.d/default.conf && \
-    echo '    root /var/www/html;' >> /etc/nginx/http.d/default.conf && \
-    echo '    index index.html index.php;' >> /etc/nginx/http.d/default.conf && \
-    echo '    location / {' >> /etc/nginx/http.d/default.conf && \
-    echo '        try_files $uri $uri/ /index.html;' >> /etc/nginx/http.d/default.conf && \
-    echo '    }' >> /etc/nginx/http.d/default.conf && \
-    echo '    location ~ \.php$ {' >> /etc/nginx/http.d/default.conf && \
-    echo '        fastcgi_pass 127.0.0.1:9000;' >> /etc/nginx/http.d/default.conf && \
-    echo '        fastcgi_index index.php;' >> /etc/nginx/http.d/default.conf && \
-    echo '        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;' >> /etc/nginx/http.d/default.conf && \
-    echo '        include fastcgi_params;' >> /etc/nginx/http.d/default.conf && \
-    echo '    }' >> /etc/nginx/http.d/default.conf && \
-    echo '}' >> /etc/nginx/http.d/default.conf
-
-# Permissions
+# Permissions Apache
 RUN chown -R www-data:www-data /var/www/html
 
-# Script de démarrage
-RUN echo '#!/bin/sh' > /start.sh && \
-    echo 'php-fpm -D' >> /start.sh && \
-    echo 'nginx -g "daemon off;"' >> /start.sh && \
-    chmod +x /start.sh
+# Activer mod_rewrite
+RUN a2enmod rewrite
 
-CMD ["/start.sh"]
+# Configuration Apache pour PHP
+RUN echo '<Directory /var/www/html>' > /etc/apache2/conf-available/php.conf && \
+    echo '    Options Indexes FollowSymLinks' >> /etc/apache2/conf-available/php.conf && \
+    echo '    AllowOverride All' >> /etc/apache2/conf-available/php.conf && \
+    echo '    Require all granted' >> /etc/apache2/conf-available/php.conf && \
+    echo '</Directory>' >> /etc/apache2/conf-available/php.conf && \
+    a2enconf php
+
+# Exposer le port 80
+EXPOSE 80
+
+# Démarrer Apache
+CMD ["apache2-foreground"]
