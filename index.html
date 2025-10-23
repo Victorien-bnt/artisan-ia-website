@@ -418,28 +418,30 @@
         <!-- Contact form -->
         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
           <h3 class="text-2xl font-semibold mb-6">Contactez-nous</h3>
-          <form id="contact-form" class="space-y-6">
+          <form id="contactForm" method="POST" action="contact.php" class="space-y-6">
             <div>
-              <input type="text" name="name" placeholder="Votre nom et entreprise" required 
+              <input type="text" name="name" placeholder="Votre nom" required 
                      class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200">
             </div>
             <div>
-              <input type="email" name="_replyto" placeholder="Votre email professionnel" required 
+              <input type="email" name="email" placeholder="Votre e-mail" required 
                      class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200">
             </div>
             <div>
-              <textarea name="message" placeholder="Expliquez ce que vous voulez automatiser (ex : factures, stock, RH…)" rows="4" required 
+              <textarea name="message" placeholder="Votre message" required 
                         class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 resize-none"></textarea>
             </div>
             <button type="submit" 
                     class="w-full px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl">
               <span class="mr-2">📧</span>
-              Envoyer le message
+              Envoyer
             </button>
             <p class="text-xs text-gray-400 mt-4 text-center">
               🔒 Connexion bancaire en lecture seule. Artisan'IA ne réalise jamais de paiements à votre place.
             </p>
-    </form>
+          </form>
+          
+          <div id="responseMessage" class="mt-4 text-center text-sm"></div>
         </div>
         
         <!-- WhatsApp contact -->
@@ -598,46 +600,14 @@
     setInterval(removeAllScrollButtons, 100);
 
     // Contact form handling - PHP SCRIPT (100% AUTOMATIC)
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-      contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const data = {
-          name: formData.get('name'),
-          email: formData.get('email'),
-          message: formData.get('message')
-        };
-        
-        // Show loading state
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Envoi en cours...';
-        submitBtn.disabled = true;
-        
-        try {
-          const response = await fetch('contact.php', {
-            method: 'POST',
-            body: formData
-          });
-          
-          const result = await response.json();
-          
-          if (result.success) {
-            alert('✅ Message envoyé avec succès ! Nous vous répondrons rapidement.');
-            contactForm.reset();
-          } else {
-            alert('❌ Erreur: ' + result.message);
-          }
-        } catch (error) {
-          alert('❌ Erreur technique. Veuillez réessayer ou nous contacter par WhatsApp.');
-        } finally {
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-        }
-      });
-    }
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      const response = await fetch(form.action, { method: 'POST', body: data });
+      const result = await response.json();
+      document.getElementById('responseMessage').innerText = result.message;
+    });
   </script>
 </body>
 </html>
