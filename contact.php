@@ -7,21 +7,13 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 // Vérifie si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = trim($_POST["name"] ?? '');
-    $email = trim($_POST["email"] ?? '');
-    $message = trim($_POST["message"] ?? '');
+    $name = $_POST["name"] ?? '';
+    $email = $_POST["email"] ?? '';
+    $message = $_POST["message"] ?? '';
     
-    // Validation des champs
     if (empty($name) || empty($email) || empty($message)) {
         http_response_code(400);
         echo json_encode(['success' => false, 'message' => 'Tous les champs sont requis']);
-        exit;
-    }
-    
-    // Validation basique seulement
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        http_response_code(400);
-        echo json_encode(['success' => false, 'message' => 'Adresse email invalide']);
         exit;
     }
     
