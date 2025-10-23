@@ -18,35 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
     
-    // Validation de l'email
+    // Validation basique seulement
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         http_response_code(400);
         echo json_encode(['success' => false, 'message' => 'Adresse email invalide']);
         exit;
-    }
-    
-    // Limitation de la taille des champs
-    if (strlen($name) > 100 || strlen($email) > 100 || strlen($message) > 1000) {
-        http_response_code(400);
-        echo json_encode(['success' => false, 'message' => 'Champs trop longs']);
-        exit;
-    }
-    
-    // Échapper les données pour éviter l'injection (sauf email pour l'envoi)
-    $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-    $message = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
-    // Email pas échappé pour l'envoi mais validé
-    
-    // Protection anti-spam simple
-    $spam_words = ['viagra', 'casino', 'loan', 'credit', 'bitcoin', 'crypto'];
-    $text_to_check = strtolower($name . ' ' . $email . ' ' . $message);
-    
-    foreach ($spam_words as $word) {
-        if (strpos($text_to_check, $word) !== false) {
-            http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'Message rejeté']);
-            exit;
-        }
     }
     
     // Configuration de l'envoi
