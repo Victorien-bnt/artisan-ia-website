@@ -600,9 +600,7 @@
     setInterval(removeAllScrollButtons, 100);
 
     // Contact form handling - PHP SCRIPT (100% AUTOMATIC)
-    console.log('Script de contact chargé');
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
-      console.log('Formulaire soumis');
       e.preventDefault();
       
       const form = e.target;
@@ -634,7 +632,6 @@
           responseDiv.className = 'mt-4 text-center text-sm text-red-400';
         }
       } catch (error) {
-        console.error('Erreur:', error);
         responseDiv.innerHTML = '❌ Erreur de connexion. Vérifiez votre connexion internet.';
         responseDiv.className = 'mt-4 text-center text-sm text-red-400';
       } finally {
