@@ -1,16 +1,23 @@
-#!/bin/bash
+name: Deploy to VPS
 
-# Deploy to Netlify with automatic form handling
-echo "🚀 Deploying Artisan'IA website to Netlify..."
+on:
+  push:
+    branches:
+      - main
 
-# Build the project
-echo "📦 Building project..."
-npm run build
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-# Deploy to Netlify
-echo "🌐 Deploying to Netlify..."
-netlify deploy --prod --dir=.
-
-echo "✅ Deployment complete!"
-echo "📧 Form submissions will be sent to: victorienbinant@artisan-ia.fr"
-echo "🔗 Website URL: https://artisan-ia.netlify.app"
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ubuntu
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/artisan-ia-website
+            git pull
