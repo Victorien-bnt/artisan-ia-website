@@ -1,35 +1,20 @@
-# Utilise PHP-FPM avec Nginx
-FROM php:8.2-fpm-alpine
+FROM php:8.2-apache
 
-# Installer msmtp pour l'envoi d'emails via OVH
-RUN apk update && apk add --no-cache msmtp ca-certificates && \
-    rm -rf /var/cache/apk/*
+# Installer msmtp et ses dépendances
+RUN apt-get update && apt-get install -y msmtp msmtp-mta ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
-# Copier la config msmtp dans le conteneur
-COPY msmtprc /etc/msmtprc
-
-# Définir le chemin d'envoi pour PHP
+# Activer msmtp comme mailer PHP
 RUN echo "sendmail_path = /usr/bin/msmtp -t" >> /usr/local/etc/php/php.ini
 
-# Installer Nginx
-RUN apk add --no-cache nginx
+# Copier la configuration msmtp dans le conteneur
+COPY msmtprc /etc/msmtprc
+
+# Créer le fichier de log
+RUN touch /var/log/msmtp.log && chmod 666 /var/log/msmtp.log
 
 # Copier les fichiers du site
 COPY . /var/www/html
 
-# Copier la configuration Nginx
-COPY nginx-config.conf /etc/nginx/conf.d/default.conf
-
-# Donner les permissions
-RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html
-
-# Expose les ports
-EXPOSE 80
-EXPOSE 443
-
-# Script de démarrage
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-
-CMD ["/start.sh"]
+# Donne les bons droits à Apache
+RUN chown -R www-data:www-data /var/www/html
