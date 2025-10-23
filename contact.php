@@ -32,10 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
     
-    // Échapper les données pour éviter l'injection
+    // Échapper les données pour éviter l'injection (sauf email pour l'envoi)
     $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-    $email = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
     $message = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+    // Email pas échappé pour l'envoi mais validé
     
     // Protection anti-spam simple
     $spam_words = ['viagra', 'casino', 'loan', 'credit', 'bitcoin', 'crypto'];
