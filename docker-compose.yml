@@ -8,10 +8,11 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./assets:/usr/share/nginx/html/assets:ro
-      - ./index.html:/usr/share/nginx/html/index.html:ro
-      - ./style.css:/usr/share/nginx/html/style.css:ro
-      - ./js:/usr/share/nginx/html/js:ro
+      - ./assets:/var/www/html/assets:ro
+      - ./index.html:/var/www/html/index.html:ro
+      - ./style.css:/var/www/html/style.css:ro
+      - ./js:/var/www/html/js:ro
+      - ./contact.php:/var/www/html/contact.php:ro
     environment:
       - NGINX_HOST=localhost
       - NGINX_PORT=80
