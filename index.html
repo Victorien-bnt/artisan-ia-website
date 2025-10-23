@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artisan'IA - L'IA au service des artisans et des entreprisesssss</title>
+  <title>Artisan'IA - L'IA au service des artisans et des entreprises</title>
   <meta name="description" content="Artisan'IA automatise votre gestion quotidienne — stocks, factures, livraisons et paiements — pendant que vous vous concentrez sur votre savoir-faire.">
   <meta property="og:title" content="Artisan'IA - L'IA au service des artisans et des entreprises">
   <meta property="og:description" content="Automatisez votre gestion quotidienne — stocks, factures, livraisons et paiements — pendant que vous vous concentrez sur votre savoir-faire.">
-  <meta property="og:image" content="g4.png">
+  <meta property="og:image" content="./assets/images/og-image.jpg">
   <meta property="og:type" content="website">
   
   <!-- Favicon -->
@@ -18,8 +18,29 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
+  <!-- Preload critical resources -->
+  <link rel="preload" href="./assets/images/g5.png" as="image">
+  <link rel="preload" href="./assets/images/Logo Artisan'IA4.svg" as="image">
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Performance optimizations -->
+  <script>
+    // Preload critical resources
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        const criticalImages = ['./assets/images/mockup-dashboard.png', './assets/images/og-image.jpg'];
+        criticalImages.forEach(src => {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = src;
+          document.head.appendChild(link);
+        });
+      });
+    }
+  </script>
   <script>
     tailwind.config = {
       theme: {
@@ -168,7 +189,7 @@
   </style>
   
 </head>
-  <body class="bg-white text-secondary-500 font-sans antialiased overflow-x-hidden scroll-smooth relative" style="scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #1d4885 #f0f0f0;">
+  <body class="bg-white text-secondary-500 font-sans antialiased overflow-x-hidden scroll-smooth relative" style="scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #1d4885 #f0f0f0;" id="main-content">
     <!-- Subtle background elements -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden">
       <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-50/30 rounded-full blur-3xl animate-pulse"></div>
@@ -180,45 +201,45 @@
   <header class="fixed top-0 left-0 w-full bg-white border-b border-gray-100 z-50 transition-all duration-300" id="header">
     <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6 lg:px-8">
       <div class="flex items-center">
-        <img src="./assets/images/g5.png" alt="Logo Artisan'IA" class="h-16 w-auto hover:scale-105 transition-all duration-300" loading="eager">
+        <img src="./assets/images/g5.png" alt="Logo Artisan'IA" class="h-16 w-auto hover:scale-105 transition-all duration-300" loading="eager" width="64" height="64">
       </div>
       
-      <nav class="hidden md:flex items-center space-x-8">
-        <a href="#hero" class="text-sm font-medium text-gray-600 hover:text-primary-500 transition-all duration-200 relative group">
+      <nav class="hidden md:flex items-center space-x-8" role="navigation" aria-label="Navigation principale">
+        <a href="#hero" class="text-sm font-medium text-gray-700 hover:text-primary-500 transition-all duration-200 relative group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Aller à la section d'accueil">
           Accueil
           <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
         </a>
-        <a href="#features" class="text-sm font-medium text-gray-600 hover:text-primary-500 transition-all duration-200 relative group">
+        <a href="#features" class="text-sm font-medium text-gray-700 hover:text-primary-500 transition-all duration-200 relative group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Découvrir les fonctionnalités">
           Fonctionnalités
           <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
         </a>
-        <a href="#contact" class="text-sm font-medium text-gray-600 hover:text-primary-500 transition-all duration-200 relative group">
+        <a href="#contact" class="text-sm font-medium text-gray-700 hover:text-primary-500 transition-all duration-200 relative group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Nous contacter">
           Contact
           <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
         </a>
       </nav>
       
-      <a href="#contact" class="hidden md:inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-medium rounded-full hover:from-primary-600 hover:to-primary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-primary-400/20">
+      <a href="#contact" class="hidden md:inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-medium rounded-full hover:from-primary-600 hover:to-primary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-primary-400/20 min-h-[44px]" aria-label="Demander une démonstration">
         <span class="mr-2">🚀</span>
-        Devenir testeur eg rz
+        Demander une démo
       </a>
       
       <!-- Mobile menu button -->
-      <button class="md:hidden p-2" id="mobile-menu-btn">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" id="mobile-menu-btn" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </div>
     
     <!-- Mobile menu -->
-    <div class="md:hidden bg-white border-t border-gray-100 hidden" id="mobile-menu">
+    <div class="md:hidden bg-white border-t border-gray-100 hidden" id="mobile-menu" role="navigation" aria-label="Menu mobile">
       <div class="px-6 py-4 space-y-4">
-        <a href="#hero" class="block text-sm font-medium text-gray-600 hover:text-gray-900">Accueil</a>
-        <a href="#features" class="block text-sm font-medium text-gray-600 hover:text-gray-900">Fonctionnalités</a>
-        <a href="#contact" class="block text-sm font-medium text-gray-600 hover:text-gray-900">Contact</a>
-        <a href="#contact" class="block w-full text-center px-4 py-2 bg-secondary-500 text-white text-sm font-medium rounded-full">
-          Devenir testeur edfgrhgndghtsgrgn
+        <a href="#hero" class="block text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Aller à la section d'accueil">Accueil</a>
+        <a href="#features" class="block text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Découvrir les fonctionnalités">Fonctionnalités</a>
+        <a href="#contact" class="block text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Nous contacter">Contact</a>
+        <a href="#contact" class="block w-full text-center px-4 py-3 bg-secondary-500 text-white text-sm font-medium rounded-full min-h-[44px] flex items-center justify-center hover:bg-secondary-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2" aria-label="Demander une démonstration">
+          Demander une démo
         </a>
       </div>
     </div>
@@ -245,16 +266,16 @@
       </div>
       
       <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-slide-up">
-        <a href="#features" class="inline-flex items-center px-8 py-4 bg-primary-500 text-white text-lg font-medium rounded-full hover:bg-primary-600 transition-all duration-300 hover:scale-105">
+        <a href="#features" class="inline-flex items-center px-8 py-4 bg-primary-500 text-white text-lg font-medium rounded-full hover:bg-primary-600 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl min-h-[56px]" aria-label="Découvrir les fonctionnalités d'Artisan'IA">
           <span class="mr-2">✨</span>
-          Découvrir Artisan'IA et ses fonctionnalités
-          <svg class="ml-2 w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          Découvrir les fonctionnalités
+          <svg class="ml-2 w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </a>
-        <a href="#contact" class="inline-flex items-center px-8 py-4 border-2 border-primary-300 text-secondary-500 text-lg font-medium rounded-full hover:border-primary-400 hover:bg-primary-50 transition-all duration-300 hover:scale-105">
+        <a href="#contact" class="inline-flex items-center px-8 py-4 border-2 border-primary-300 text-secondary-500 text-lg font-medium rounded-full hover:border-primary-400 hover:bg-primary-50 transition-all duration-300 hover:scale-105 min-h-[56px]" aria-label="Demander une démonstration personnalisée">
           <span class="mr-2">🎯</span>
-          Voir la démonstration en direct
+          Demander une démo gratuite
         </a>
       </div>
     </div>
@@ -275,26 +296,26 @@
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="group p-8 rounded-2xl border border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-300 hover:-translate-y-2 bg-white">
+        <div class="group p-8 rounded-2xl border border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-300 hover:-translate-y-2 bg-white focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2" tabindex="0" role="article" aria-labelledby="feature-1-title">
           <div class="w-14 h-14 bg-gradient-to-br from-primary-100 to-primary-200 rounded-xl flex items-center justify-center mb-6 group-hover:from-primary-500 group-hover:to-primary-600 transition-all duration-300 group-hover:scale-110">
-            <svg class="w-7 h-7 text-primary-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-7 h-7 text-primary-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-secondary-500 mb-3 group-hover:text-primary-700 transition-colors duration-300">Analyse & reconnaissance de factures</h3>
-          <p class="text-gray-600 leading-relaxed">
+          <h3 id="feature-1-title" class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-primary-700 transition-colors duration-300">Analyse & reconnaissance de factures</h3>
+          <p class="text-gray-700 leading-relaxed">
             OCR intelligent : lecture automatique de vos factures et bons de livraison. Extraction précise des montants, fournisseurs, et dates pour un suivi comptable sans effort.
           </p>
         </div>
         
-        <div class="group p-8 rounded-2xl border border-gray-100 hover:border-secondary-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white">
+        <div class="group p-8 rounded-2xl border border-gray-200 hover:border-secondary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white focus-within:ring-2 focus-within:ring-secondary-500 focus-within:ring-offset-2" tabindex="0" role="article" aria-labelledby="feature-2-title">
           <div class="w-14 h-14 bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-xl flex items-center justify-center mb-6 group-hover:from-secondary-500 group-hover:to-secondary-600 transition-all duration-300 group-hover:scale-110">
-            <svg class="w-7 h-7 text-secondary-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-7 h-7 text-secondary-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-secondary-500 mb-3 group-hover:text-secondary-700 transition-colors duration-300">Tri et transformation de données</h3>
-          <p class="text-gray-600 leading-relaxed">
+          <h3 id="feature-2-title" class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-secondary-700 transition-colors duration-300">Tri et transformation de données</h3>
+          <p class="text-gray-700 leading-relaxed">
             Vos documents sont classés automatiquement par fournisseur, type et chantier. Artisan'IA met à jour votre base de données et simplifie vos recherches.
           </p>
         </div>
@@ -418,24 +439,35 @@
         <!-- Contact form -->
         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
           <h3 class="text-2xl font-semibold mb-6">Contactez-nous</h3>
-          <form id="contactForm" method="POST" action="contact.php" class="space-y-6">
+          <form id="contactForm" method="POST" action="contact.php" class="space-y-6" novalidate>
             <div>
-              <input type="text" name="name" placeholder="Votre nom" required 
-                     class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200">
+              <label for="contact-name" class="sr-only">Votre nom</label>
+              <input type="text" name="name" id="contact-name" placeholder="Votre nom" required 
+                     class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 min-h-[44px]" 
+                     aria-describedby="name-error" autocomplete="name">
+              <div id="name-error" class="text-red-300 text-sm mt-1 hidden" role="alert"></div>
             </div>
             <div>
-              <input type="email" name="email" placeholder="Votre e-mail" required 
-                     class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200">
+              <label for="contact-email" class="sr-only">Votre e-mail</label>
+              <input type="email" name="email" id="contact-email" placeholder="Votre e-mail" required 
+                     class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 min-h-[44px]" 
+                     aria-describedby="email-error" autocomplete="email">
+              <div id="email-error" class="text-red-300 text-sm mt-1 hidden" role="alert"></div>
             </div>
             <div>
-              <textarea name="message" placeholder="Votre message" required 
-                        class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 resize-none"></textarea>
+              <label for="contact-message" class="sr-only">Votre message</label>
+              <textarea name="message" id="contact-message" placeholder="Votre message" required 
+                        class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200 resize-none min-h-[120px]" 
+                        aria-describedby="message-error"></textarea>
+              <div id="message-error" class="text-red-300 text-sm mt-1 hidden" role="alert"></div>
             </div>
             <button type="submit" 
-                    class="w-full px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl">
+                    class="w-full px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl min-h-[44px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" 
+                    aria-describedby="submit-status">
               <span class="mr-2">📧</span>
               Envoyer
             </button>
+            <div id="submit-status" class="sr-only" aria-live="polite"></div>
             <p class="text-xs text-gray-400 mt-4 text-center">
               🔒 Connexion bancaire en lecture seule. Artisan'IA ne réalise jamais de paiements à votre place.
             </p>
@@ -498,19 +530,23 @@
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href')); 
         if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+          const headerHeight = document.querySelector('header').offsetHeight;
+          const targetPosition = target.offsetTop - headerHeight - 20;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
           });
         }
       });
     });
 
-    // Premium header scroll effect
+    // Premium header scroll effect with throttling
     let lastScrollY = window.scrollY;
     const header = document.getElementById('header');
+    let ticking = false;
     
-    window.addEventListener('scroll', () => {
+    function updateHeader() {
       const currentScrollY = window.scrollY;
       
       if (currentScrollY > 100) {
@@ -526,7 +562,17 @@
       }
       
       lastScrollY = currentScrollY;
-    });
+      ticking = false;
+    }
+    
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    }
+    
+    window.addEventListener('scroll', requestTick, { passive: true });
 
     // Premium parallax effect for background elements
     window.addEventListener('scroll', () => {
@@ -599,7 +645,7 @@
     // Supprimer toutes les 100ms pour être sûr
     setInterval(removeAllScrollButtons, 100);
 
-    // Contact form handling - PHP SCRIPT (100% AUTOMATIC)
+    // Contact form handling with enhanced accessibility
     document.addEventListener('DOMContentLoaded', function() {
       console.log('🚀 DOM chargé - Recherche du formulaire...');
       
@@ -611,12 +657,73 @@
       
       console.log('✅ Formulaire trouvé - Ajout du listener...');
       
+      // Enhanced form validation
+      function validateForm() {
+        const name = form.querySelector('#contact-name');
+        const email = form.querySelector('#contact-email');
+        const message = form.querySelector('#contact-message');
+        let isValid = true;
+        
+        // Clear previous errors
+        document.querySelectorAll('[id$="-error"]').forEach(error => {
+          error.classList.add('hidden');
+          error.textContent = '';
+        });
+        
+        // Validate name
+        if (!name.value.trim()) {
+          const nameError = document.getElementById('name-error');
+          nameError.textContent = 'Le nom est requis';
+          nameError.classList.remove('hidden');
+          name.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        } else {
+          name.setAttribute('aria-invalid', 'false');
+        }
+        
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.value.trim()) {
+          const emailError = document.getElementById('email-error');
+          emailError.textContent = 'L\'email est requis';
+          emailError.classList.remove('hidden');
+          email.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        } else if (!emailRegex.test(email.value)) {
+          const emailError = document.getElementById('email-error');
+          emailError.textContent = 'Veuillez entrer un email valide';
+          emailError.classList.remove('hidden');
+          email.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        } else {
+          email.setAttribute('aria-invalid', 'false');
+        }
+        
+        // Validate message
+        if (!message.value.trim()) {
+          const messageError = document.getElementById('message-error');
+          messageError.textContent = 'Le message est requis';
+          messageError.classList.remove('hidden');
+          message.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        } else {
+          message.setAttribute('aria-invalid', 'false');
+        }
+        
+        return isValid;
+      }
+      
       form.addEventListener('submit', async function(e) {
         console.log('🔥 FORMULAIRE SOUMIS !!!');
         e.preventDefault();
         
+        if (!validateForm()) {
+          return;
+        }
+        
         const responseDiv = document.getElementById('responseMessage');
         const submitBtn = form.querySelector('button[type="submit"]');
+        const statusDiv = document.getElementById('submit-status');
         
         console.log('📝 Éléments trouvés:', { responseDiv, submitBtn });
         
@@ -624,6 +731,7 @@
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = '⏳ Envoi en cours...';
         submitBtn.disabled = true;
+        statusDiv.textContent = 'Envoi du message en cours...';
         
         responseDiv.innerHTML = '⏳ Envoi en cours...';
         responseDiv.style.color = '#6b7280';
@@ -634,7 +742,6 @@
         
         console.log('🌐 Envoi vers:', form.action);
         
-        // VRAIE REQUÊTE VERS TON SERVEUR PHP - APACHE CONFIGURÉ
         try {
           const formData = new FormData(form);
           console.log('📤 Données du formulaire:', Object.fromEntries(formData));
@@ -661,6 +768,7 @@
             responseDiv.style.padding = '12px';
             responseDiv.style.borderRadius = '8px';
             responseDiv.style.border = '1px solid #10b981';
+            statusDiv.textContent = 'Message envoyé avec succès';
             form.reset();
           } else {
             console.log('❌ Erreur du serveur:', result.message);
@@ -670,6 +778,7 @@
             responseDiv.style.padding = '12px';
             responseDiv.style.borderRadius = '8px';
             responseDiv.style.border = '1px solid #ef4444';
+            statusDiv.textContent = 'Erreur lors de l\'envoi';
           }
         } catch (error) {
           console.error('💥 ERREUR DÉTAILLÉE:', error);
@@ -679,9 +788,9 @@
           responseDiv.style.padding = '12px';
           responseDiv.style.borderRadius = '8px';
           responseDiv.style.border = '1px solid #ef4444';
+          statusDiv.textContent = 'Erreur de connexion';
         } finally {
           console.log('🔄 Réactivation du bouton...');
-          // Réactiver le bouton
           submitBtn.innerHTML = originalText;
           submitBtn.disabled = false;
         }
