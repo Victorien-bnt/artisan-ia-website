@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $to = "victorienbinant@artisan-ia.fr";
     $subject = "Nouveau message depuis Artisan'IA - " . $name;
     $body = "Nom: $name\nEmail: $email\n\nMessage:\n$message";
-    $headers = "From: $email\r\nReply-To: $email\r\n";
+    $headers = "From: victorienbinant@artisan-ia.fr\r\nReply-To: $email\r\n";
     
     // Envoi de l'email
     if (mail($to, $subject, $body, $headers)) {
