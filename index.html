@@ -612,14 +612,21 @@
         const result = await response.json();
         
         // Afficher le message de réponse
-        responseDiv.innerText = result.message;
-        
-        // Si succès, vider le formulaire
         if (result.success) {
-          form.reset();
-          responseDiv.style.color = 'green';
+          responseDiv.innerHTML = '✅ <strong>Mail envoyé avec succès !</strong> Nous vous répondrons rapidement.';
+          responseDiv.style.color = '#10b981';
+          responseDiv.style.backgroundColor = '#d1fae5';
+          responseDiv.style.padding = '12px';
+          responseDiv.style.borderRadius = '8px';
+          responseDiv.style.border = '1px solid #10b981';
+          form.reset(); // Vider le formulaire
         } else {
-          responseDiv.style.color = 'red';
+          responseDiv.innerHTML = '❌ <strong>Erreur :</strong> ' + result.message;
+          responseDiv.style.color = '#ef4444';
+          responseDiv.style.backgroundColor = '#fee2e2';
+          responseDiv.style.padding = '12px';
+          responseDiv.style.borderRadius = '8px';
+          responseDiv.style.border = '1px solid #ef4444';
         }
       } catch (error) {
         responseDiv.innerText = 'Erreur de connexion';
