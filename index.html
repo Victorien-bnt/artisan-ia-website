@@ -655,7 +655,8 @@
             responseDiv.style.border = '1px solid #ef4444';
           }
         } catch (error) {
-          responseDiv.innerHTML = '❌ <strong>Erreur de connexion</strong> - Vérifiez votre connexion internet.';
+          console.error('Erreur détaillée:', error);
+          responseDiv.innerHTML = '❌ <strong>Erreur :</strong> ' + error.message + ' - Vérifiez la console pour plus de détails.';
           responseDiv.style.color = '#ef4444';
           responseDiv.style.backgroundColor = '#fee2e2';
           responseDiv.style.padding = '12px';
