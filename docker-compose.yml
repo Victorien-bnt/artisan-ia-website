@@ -1,29 +1,18 @@
-version: '3.8'
 services:
   artisania-website:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: artisania-website
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./assets:/var/www/html/assets:ro
-      - ./index.html:/var/www/html/index.html:ro
-      - ./style.css:/var/www/html/style.css:ro
-      - ./js:/var/www/html/js:ro
-      - ./contact.php:/var/www/html/contact.php:ro
-    environment:
-      - NGINX_HOST=localhost
-      - NGINX_PORT=80
+    restart: always
     networks:
-      - artisania-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - artisan_network   # 🔥 réseau commun avec ton nginx proxy
+    environment:
+      - VIRTUAL_HOST=artisan-ia.fr
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=artisan-ia.fr
+      - LETSENCRYPT_EMAIL=victorienbinant@artisan-ia.fr
 
 networks:
-  artisania-network:
-    driver: bridge
+  artisan_network:
+    external: true
