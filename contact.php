@@ -1,30 +1,37 @@
 <?php
-// --- Debug PHP ---
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// Configuration pour JSON
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
 
-// --- Vérifie si le formulaire a été soumis ---
+// Vérifie si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars($_POST["name"]);
-    $email = htmlspecialchars($_POST["email"]);
-    $message = htmlspecialchars($_POST["message"]);
-
-    // --- Configuration de l'envoi ---
+    $name = $_POST["name"] ?? '';
+    $email = $_POST["email"] ?? '';
+    $message = $_POST["message"] ?? '';
+    
+    if (empty($name) || empty($email) || empty($message)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Tous les champs sont requis']);
+        exit;
+    }
+    
+    // Configuration de l'envoi
     $to = "victorienbinant@artisan-ia.fr";
-    $subject = "?? Nouveau message depuis Artisan’IA";
+    $subject = "Nouveau message depuis Artisan'IA - " . $name;
     $body = "Nom: $name\nEmail: $email\n\nMessage:\n$message";
-    $headers = "From: $email\r\n";
-    $headers .= "Reply-To: $email\r\n";
-    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-    // --- Test de la fonction mail() ---
+    $headers = "From: $email\r\nReply-To: $email\r\n";
+    
+    // Envoi de l'email
     if (mail($to, $subject, $body, $headers)) {
-        echo "<p style='color:green;'>? Message envoyé avec succès à $to</p>";
+        echo json_encode(['success' => true, 'message' => 'Message envoyé avec succès']);
     } else {
-        echo "<p style='color:red;'>? Erreur lors de l’envoi du message.</p>";
-        error_log('?? Échec de mail() pour : ' . $email);
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'envoi']);
     }
 } else {
-    echo "<p style='color:gray;'>?? Aucun formulaire soumis (méthode POST non détectée).</p>";
+    http_response_code(405);
+    echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
 }
 ?>
