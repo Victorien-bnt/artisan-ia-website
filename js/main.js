@@ -120,34 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', throttle(updateParallax, 10));
   
   // ===== FORM HANDLING =====
-  const contactForm = document.querySelector('form[action*="formspree"]');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      
-      // Show loading state
-      submitBtn.textContent = 'Envoi en cours...';
-      submitBtn.disabled = true;
-      submitBtn.classList.add('loading');
-      
-      // Simulate form submission (replace with actual Formspree handling)
-      setTimeout(() => {
-        // Reset button
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('loading');
-        
-        // Show success message
-        showNotification('Message envoyé avec succès !', 'success');
-        
-        // Reset form
-        this.reset();
-      }, 2000);
-    });
-  }
+  // Script de formulaire supprimé - géré par index.html
   
   // ===== NOTIFICATION SYSTEM =====
   function showNotification(message, type = 'info') {
