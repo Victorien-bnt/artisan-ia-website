@@ -1,42 +1,18 @@
 <?php
-// Script simple pour gérer le formulaire de contact
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars($_POST["name"]);
+    $email = htmlspecialchars($_POST["email"]);
+    $message = htmlspecialchars($_POST["message"]);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $message = $_POST['message'] ?? '';
-    
-    if (empty($name) || empty($email) || empty($message)) {
-        http_response_code(400);
-        echo json_encode(['success' => false, 'message' => 'Tous les champs sont requis']);
-        exit;
-    }
-    
-    // Configuration email
-    $to = 'victorienbinant@artisan-ia.fr';
-    $subject = 'Nouveau contact Artisan\'IA - ' . $name;
+    $to = "victorienbinant@artisan-ia.fr";
+    $subject = "📩 Nouveau message depuis le site Artisan’IA";
     $body = "Nom: $name\nEmail: $email\n\nMessage:\n$message";
-    $headers = "From: $email\r\nReply-To: $email\r\n";
-    
-    // Envoyer l'email
+    $headers = "From: $email";
+
     if (mail($to, $subject, $body, $headers)) {
-        // Log de succès
-        error_log("Email envoyé avec succès - Nom: $name, Email: $email");
-        file_put_contents('/var/log/contact.log', date('Y-m-d H:i:s') . " - Email envoyé: $name ($email)\n", FILE_APPEND);
-        echo json_encode(['success' => true, 'message' => 'Message envoyé avec succès']);
+        echo "<p style='color:green'>✅ Message envoyé avec succès.</p>";
     } else {
-        // Log d'erreur
-        error_log("Erreur envoi email - Nom: $name, Email: $email");
-        file_put_contents('/var/log/contact.log', date('Y-m-d H:i:s') . " - Erreur envoi: $name ($email)\n", FILE_APPEND);
-        http_response_code(500);
-        echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'envoi']);
+        echo "<p style='color:red'>❌ Échec de l'envoi du message.</p>";
     }
-} else {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
 }
 ?>
