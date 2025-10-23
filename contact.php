@@ -7,14 +7,46 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 // Vérifie si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["name"] ?? '';
-    $email = $_POST["email"] ?? '';
-    $message = $_POST["message"] ?? '';
+    $name = trim($_POST["name"] ?? '');
+    $email = trim($_POST["email"] ?? '');
+    $message = trim($_POST["message"] ?? '');
     
+    // Validation des champs
     if (empty($name) || empty($email) || empty($message)) {
         http_response_code(400);
         echo json_encode(['success' => false, 'message' => 'Tous les champs sont requis']);
         exit;
+    }
+    
+    // Validation de l'email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Adresse email invalide']);
+        exit;
+    }
+    
+    // Limitation de la taille des champs
+    if (strlen($name) > 100 || strlen($email) > 100 || strlen($message) > 1000) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Champs trop longs']);
+        exit;
+    }
+    
+    // Échapper les données pour éviter l'injection
+    $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+    $email = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+    $message = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+    
+    // Protection anti-spam simple
+    $spam_words = ['viagra', 'casino', 'loan', 'credit', 'bitcoin', 'crypto'];
+    $text_to_check = strtolower($name . ' ' . $email . ' ' . $message);
+    
+    foreach ($spam_words as $word) {
+        if (strpos($text_to_check, $word) !== false) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Message rejeté']);
+            exit;
+        }
     }
     
     // Configuration de l'envoi
