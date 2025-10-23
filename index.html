@@ -229,7 +229,7 @@
         </a>
       </nav>
       
-      <a href="#contact" class="hidden md:inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-medium rounded-full hover:from-primary-600 hover:to-primary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-primary-400/20 min-h-[44px]" aria-label="Demander une démonstration">
+      <a href="#contact" class="hidden md:inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-medium rounded-full hover:from-primary-600 hover:to-primary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-primary-400/20 min-h-[44px]" aria-label="Demander une démonstration" onclick="prefillDemoForm()">
         <span class="mr-2">🚀</span>
         Demander une démo
       </a>
@@ -248,7 +248,7 @@
         <a href="#hero" class="block text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Aller à la section d'accueil">Accueil</a>
         <a href="#features" class="block text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Découvrir les fonctionnalités">Fonctionnalités</a>
         <a href="#contact" class="block text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Nous contacter">Contact</a>
-        <a href="#contact" class="block w-full text-center px-4 py-3 bg-secondary-500 text-white text-sm font-medium rounded-full min-h-[44px] flex items-center justify-center hover:bg-secondary-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2" aria-label="Demander une démonstration">
+        <a href="#contact" class="block w-full text-center px-4 py-3 bg-secondary-500 text-white text-sm font-medium rounded-full min-h-[44px] flex items-center justify-center hover:bg-secondary-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2" aria-label="Demander une démonstration" onclick="prefillDemoForm()">
           Demander une démo
         </a>
       </div>
@@ -283,7 +283,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </a>
-        <a href="#contact" class="inline-flex items-center px-8 py-4 border-2 border-primary-300 text-secondary-500 text-lg font-medium rounded-full hover:border-primary-400 hover:bg-primary-50 transition-all duration-300 hover:scale-105 min-h-[56px] shadow-lg hover:shadow-xl" style="box-shadow: 0 4px 8px rgba(0,0,0,0.1);" aria-label="Demander une démonstration personnalisée">
+        <a href="#contact" class="inline-flex items-center px-8 py-4 border-2 border-primary-300 text-secondary-500 text-lg font-medium rounded-full hover:border-primary-400 hover:bg-primary-50 transition-all duration-300 hover:scale-105 min-h-[56px] shadow-lg hover:shadow-xl" style="box-shadow: 0 4px 8px rgba(0,0,0,0.1);" aria-label="Demander une démonstration personnalisée" onclick="prefillDemoForm()">
           <span class="mr-2">🎯</span>
           Demander une démo gratuite
         </a>
@@ -825,6 +825,43 @@
         }
       });
     });
+    
+    // ===== PRE-FILL DEMO FORM FUNCTION =====
+    function prefillDemoForm() {
+      // Attendre que la page soit chargée
+      setTimeout(() => {
+        const nameField = document.getElementById('contact-name');
+        const emailField = document.getElementById('contact-email');
+        const messageField = document.getElementById('contact-message');
+        
+        if (nameField && emailField && messageField) {
+          // Préremplir avec un message de démonstration
+          nameField.value = '';
+          emailField.value = '';
+          messageField.value = 'Bonjour,\n\nJe souhaite obtenir une démonstration personnalisée d\'Artisan\'IA pour mon activité.\n\nPouvez-vous me recontacter pour planifier un rendez-vous ?\n\nMerci par avance.';
+          
+          // Focus sur le champ nom pour que l'utilisateur puisse compléter
+          nameField.focus();
+          
+          // Ajouter un effet visuel pour indiquer que le formulaire est prérempli
+          messageField.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+          messageField.style.borderColor = '#3b82f6';
+          
+          // Retirer l'effet après 3 secondes
+          setTimeout(() => {
+            messageField.style.backgroundColor = '';
+            messageField.style.borderColor = '';
+          }, 3000);
+          
+          console.log('✅ Formulaire prérempli avec message de démonstration');
+        } else {
+          console.log('❌ Champs du formulaire non trouvés');
+        }
+      }, 500); // Délai pour s'assurer que la page est chargée
+    }
+    
+    // Rendre la fonction globale
+    window.prefillDemoForm = prefillDemoForm;
   </script>
 </body>
 </html>
