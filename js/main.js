@@ -11,16 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenuBtn.addEventListener('click', function() {
       mobileMenu.classList.toggle('hidden');
       
-      // Animate logo icon
-      const logo = mobileMenuBtn.querySelector('img');
-      if (logo) {
-        if (mobileMenu.classList.contains('hidden')) {
-          logo.style.transform = 'rotate(0deg) scale(1)';
-          logo.style.opacity = '1';
-        } else {
-          logo.style.transform = 'rotate(180deg) scale(0.9)';
-          logo.style.opacity = '0.7';
-        }
+      // Animate hamburger icon
+      const icon = mobileMenuBtn.querySelector('svg');
+      if (mobileMenu.classList.contains('hidden')) {
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+      } else {
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
       }
     });
     
@@ -28,11 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
-        const logo = mobileMenuBtn.querySelector('img');
-        if (logo) {
-          logo.style.transform = 'rotate(0deg) scale(1)';
-          logo.style.opacity = '1';
-        }
+        const icon = mobileMenuBtn.querySelector('svg');
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
       });
     });
   }
