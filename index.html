@@ -45,6 +45,9 @@
     tailwind.config = {
       theme: {
         extend: {
+          screens: {
+            'xs': '475px',
+          },
           fontFamily: {
             'sans': ['Inter', 'system-ui', 'sans-serif'],
           },
@@ -268,7 +271,8 @@
         <a href="#hero" class="block text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Aller à la section d'accueil">Accueil</a>
         <a href="#features" class="block text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Découvrir les fonctionnalités">Fonctionnalités</a>
         <a href="#contact" class="block text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm px-2 py-1" aria-label="Nous contacter">Contact</a>
-        <a href="#contact" class="block w-full text-center px-4 py-3 bg-secondary-500 text-white text-sm font-medium rounded-full min-h-[44px] flex items-center justify-center hover:bg-secondary-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2" aria-label="Demander une démonstration" onclick="prefillDemoForm()">
+        <a href="#contact" class="block w-full text-center px-6 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-base font-medium rounded-full min-h-[56px] flex items-center justify-center hover:from-primary-600 hover:to-primary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" aria-label="Demander une démonstration" onclick="prefillDemoForm()">
+          <span class="mr-2">🚀</span>
           Demander une démo
         </a>
       </div>
@@ -281,7 +285,7 @@
     
     <div class="max-w-5xl mx-auto">
       <div class="animate-fade-in">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 leading-tight tracking-tight relative z-10">
+        <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 leading-tight tracking-tight relative z-10">
           <span class="text-primary-500" style="text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             L'IA au service des artisans<br>
             <span class="text-secondary-500" style="text-shadow: 0 2px 4px rgba(0,0,0,0.1);">et des entreprises</span>
@@ -316,9 +320,9 @@
   </section>
 
   <!-- FEATURES SECTION -->
-  <section id="features" class="py-20 bg-white relative z-10">
+  <section id="features" class="py-16 md:py-20 bg-white relative z-10">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center mb-20">
+      <div class="text-center mb-16 md:mb-20">
         <h2 class="text-4xl md:text-5xl font-bold text-secondary-500 mb-6">
           Vos outils d'automatisation
         </h2>
@@ -380,7 +384,7 @@
   </section>
 
   <!-- WHY SECTION -->
-  <section class="py-12 bg-gray-50/50 relative z-10">
+  <section class="py-16 md:py-20 bg-gray-50/50 relative z-10">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-4xl md:text-5xl font-bold text-secondary-500 mb-6">
@@ -405,7 +409,7 @@
   </section>
 
   <!-- TESTIMONIAL SECTION -->
-  <section class="py-20 bg-gradient-to-br from-gray-50/80 to-white relative z-10">
+  <section class="py-16 md:py-20 bg-gradient-to-br from-gray-50/80 to-white relative z-10">
     <div class="max-w-6xl mx-auto px-6 lg:px-8">
       <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Caroline - Mamzelle Popinette -->
@@ -456,7 +460,7 @@
   </section>
 
   <!-- CONTACT SECTION -->
-  <section id="contact" class="py-20 bg-secondary-500 text-white relative z-10">
+  <section id="contact" class="py-16 md:py-20 bg-secondary-500 text-white relative z-10">
     
     <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
       <h2 class="text-4xl md:text-5xl font-bold mb-6">
